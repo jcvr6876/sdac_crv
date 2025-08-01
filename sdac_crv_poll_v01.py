@@ -11,13 +11,12 @@ FILE_CANDIDATI_URL = "https://raw.githubusercontent.com/jcvr6876/sdac_crv/main/n
 
 
 @st.cache_data
-def carica_candidati(file_path):
-    df = pd.read_csv(file_path)
+def carica_candidati_da_url(url):
+    df = pd.read_csv(url)
     df.columns = [c.strip().lower() for c in df.columns]
     if "cognome" not in df.columns or "nome" not in df.columns:
         st.error("Il CSV deve contenere almeno le colonne 'cognome' e 'nome'.")
         return []
-
     df_sorted = df.sort_values(by=["nome", "cognome"])
     candidati = (df_sorted["nome"].str.strip() + " " + df_sorted["cognome"].str.strip()).tolist()
     return candidati
