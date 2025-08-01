@@ -4,11 +4,11 @@ import json
 import os
 from collections import Counter
 
-#FILE_CANDIDATI = r"C:\0-Tools\0_SDAC\Caravaggio\nomi_cognomi_chiesa.csv"
-FILE_VOTI = r"C:\0-Tools\0_SDAC\Caravaggio\voti_exit_poll.json"
+# URL raw GitHub per il file CSV candidati
 FILE_CANDIDATI_URL = "https://raw.githubusercontent.com/jcvr6876/sdac_crv/main/nomi_cognomi_chiesa.csv"
 
-
+# File locale JSON per i voti (si salva e legge localmente)
+FILE_VOTI = "voti_exit_poll.json"
 
 @st.cache_data
 def carica_candidati_da_url(url):
@@ -74,11 +74,8 @@ def reload_page():
 def main():
     st.title("Exit Poll Votazione Candidati - Voto Segreto")
 
-    if not os.path.exists(FILE_CANDIDATI):
-        st.error(f"File '{FILE_CANDIDATI}' non trovato. Caricalo nella stessa cartella.")
-        return
-
-    candidati = carica_candidati(FILE_CANDIDATI)
+    # Carica candidati da GitHub
+    candidati = carica_candidati_da_url(FILE_CANDIDATI_URL)
     if not candidati:
         st.warning("Nessun candidato trovato o errore nel file CSV.")
         return
@@ -139,7 +136,6 @@ def main():
             st.session_state.votato = False
             st.session_state.ultimo_voto = []
             st.session_state.tematica = ""
-            # resetta checkbox
             for candidato in candidati:
                 key = f"check_{candidato}"
                 if key in st.session_state:
