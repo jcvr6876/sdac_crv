@@ -4,8 +4,8 @@ import json
 import os
 from collections import Counter
 
-FILE_CANDIDATI = r"C:\0-Tools\0_SDAC\Caravaggio\nomi_cognomi_chiesa.csv"
-#FILE_VOTI = r"C:\0-Tools\0_SDAC\Caravaggio\voti_exit_poll.json"
+#FILE_CANDIDATI = r"C:\0-Tools\0_SDAC\Caravaggio\nomi_cognomi_chiesa.csv"
+FILE_VOTI = r"C:\0-Tools\0_SDAC\Caravaggio\voti_exit_poll.json"
 FILE_CANDIDATI_URL = "https://raw.githubusercontent.com/jcvr6876/sdac_crv/main/nomi_cognomi_chiesa.csv"
 
 
